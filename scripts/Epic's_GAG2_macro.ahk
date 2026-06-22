@@ -102,6 +102,23 @@ ScrollDown(amount := 1) {
         , "UPtr", 0)
 }
 
+ScrollUp(amount := 1) {
+    BaseHeight := 1080
+
+    ; Scale factor (based mostly on height, since scroll is vertical)
+    Scale := WindowHeight / BaseHeight
+
+    ; Positive amount scrolls UP
+    AdjustedAmount := Round(amount * 120 * Scale)
+
+    DllCall("user32.dll\mouse_event"
+        , "UInt", 0x0800   ; MOUSEEVENTF_WHEEL
+        , "UInt", 0
+        , "UInt", 0
+        , "UInt", AdjustedAmount
+        , "UPtr", 0)
+}
+
 
 CheckSetting(section,key){
     if (IniRead(settingsFile, section, key) == 1){
@@ -129,7 +146,10 @@ relativeMouseMove(relx, rely) {
 ; }
 
 Walk_Studs(studs, MoveKey1, MoveKey2:=0) {
-	currentWalkSpeed := Integer(IniRead(settingsFile,"Settings", "MoveSpeed", 16))
+    if IniRead(settingsFile, "Settings", "MoveSpeed", 16) == "" {
+        IniWrite("16", settingsFile, "Settings", "MoveSpeed")
+    }
+	currentWalkSpeed := Integer(IniRead(settingsFile, "Settings", "MoveSpeed", 16))
 	sleepTime := (studs / currentWalkSpeed) * 1000
 	Send "{" MoveKey1  " down}" (MoveKey2 ? "{" MoveKey2  " down}" : "")
 	HyperSleep sleepTime
@@ -564,11 +584,17 @@ buyShop(itemList, itemType){
         Click
         Sleep(350)
 
+        if itemList[A_Index] == "Strawberry Sniper"{
+            ScrollUp(2)
+            Sleep(250)
+        }
+
         if (CheckSetting(itemType, StrReplace(item, " ", ""))){
             CheckStock(A_Index, itemlist)
         } else {
             Sleep(200)
         }
+
 
     }
     CloseShop()
@@ -644,7 +670,7 @@ getItems(item){
         }
     }
 
-    if Type(fileContent[item]) != "Array" {
+    if Type(fileContent) != "Map" {
         PlayerStatus("Type: " Type(fileContent), "0xFF0000",,,,false)
         PlayerStatus("Please contact _epic. for this error. " JSON.stringify(fileContent[item]), "0xFF0000",,true,,false)
         fileContent := ""
