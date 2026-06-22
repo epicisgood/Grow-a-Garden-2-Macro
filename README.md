@@ -1,4 +1,4 @@
-# 🍄 Epic's Grow A Garden 2 Macro
+# Epic's Grow A Garden 2 Macro
 
 ![GitHub Repo stars](https://img.shields.io/github/stars/epicisgood/Grow-a-Garden-2-Macro?style=flat)
 ![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/epicisgood/Grow-a-Garden-2-Macro/total)
@@ -16,12 +16,19 @@ A macro for **Grow A Garden 2** that automatically buys your selected seeds, gea
 
 ---
 
-## 📥 Installation
+## Installation
 
 1. **Download the Repository**
-
-   * Visit the [Latest Release](https://github.com/epicisgood/Grow-a-Garden-2-Macro/releases/latest)
+   
+   ### Stable Version
+   * Visit the [Latest Stable Release](https://github.com/epicisgood/Grow-a-Garden-2-Macro/releases/latest)
    * Download and **extract** the ZIP file
+
+   ### Beta Version
+   * Download the [Latest Beta Release](https://github.com/epicisgood/Grow-a-Garden-2-Macro/archive/refs/heads/main.zip)
+   * Download and **extract** the ZIP file
+   Please note that there maybe bugs.   
+   Beta includes future features.
 
 2. **Run the Macro**
 
@@ -34,19 +41,19 @@ A macro for **Grow A Garden 2** that automatically buys your selected seeds, gea
 
 ---
 
-## ⌨️ Controls
+## Controls
 
 | Action      | Key |
 | ----------- | --- |
 | Start Macro | F1  |
-| Stop Macro  | F2  |
-| Stop Macro | ``Alt`` ``S``  |
-| Pause Macro | F3  |
+| Pause Macro  | F2  |
+| Pause Macro | ``Alt`` ``S``  |
+| Stop Macro | F3  |
 
 ---
 
 
-## 📬 Contact
+## Contact
 
 Need help extracting ZIPs or setting things up?
 
