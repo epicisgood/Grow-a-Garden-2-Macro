@@ -584,11 +584,6 @@ buyShop(itemList, itemType){
         Click
         Sleep(350)
 
-        if itemList[A_Index] == "Strawberry Sniper"{
-            ScrollUp(2)
-            Sleep(250)
-        }
-
         if (CheckSetting(itemType, StrReplace(item, " ", ""))){
             CheckStock(A_Index, itemlist)
         } else {
