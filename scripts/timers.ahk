@@ -19,7 +19,7 @@ LastShopTime := nowUnix()
 
 
 ; The highest object will be the last item in loop.
-Shops := {
+global Shops := {
     Crates: {
         name: "Crates",
         lastTime: LastShopTime,

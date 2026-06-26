@@ -37,7 +37,6 @@ SlashKey := "vk6F" ; /
 SC_LShift:="sc02a" ; LShift
 
 
-
 #Include "%A_ScriptDir%"
 #include ..\lib\
 
@@ -61,13 +60,12 @@ SC_LShift:="sc02a" ; LShift
 #Include timers.ahk
 
 
-
-
 ;@Ahk2Exe-AddResource Gui\index.html, Gui\index.html
 ;@Ahk2Exe-AddResource Gui\script.js, Gui\script.js
 ;@Ahk2Exe-AddResource Gui\style.css, Gui\style.css
 ;@Ahk2Exe-AddResource ..\Lib\32bit\WebView2Loader.dll, 32bit\WebView2Loader.dll
 ;@Ahk2Exe-AddResource ..\Lib\64bit\WebView2Loader.dll, 64bit\WebView2Loader.dll
+
 
 
 HyperSleep(ms) {
@@ -399,14 +397,15 @@ ZoomAlign(){
 CameraCorrection(){
     Disconnect()
     CloseClutter()
-
-    loop 3 {
-        Sleep(250)
-        Clickbutton_Tabs("Seeds")
-        Sleep(250)
-        Clickbutton_Tabs("Garden")
-    }
-
+    Clickbutton_Tabs("Garden")
+    Sleep(125)
+    Click 5
+    Sleep(125)
+    Clickbutton_Tabs("Seeds")
+    Sleep(125)
+    Click 5
+    Sleep(125)
+    Clickbutton_Tabs("Garden")
     Sleep(1000)
     Walk_Studs(12, AKey, SKey)
     ZoomAlign()
@@ -533,7 +532,7 @@ CheckStock(index, list){
             MouseMove(x, y)
             SpamClick(15)
             Gdip_DisposeImage(pBMScreen)
-            Sleep(150)
+            ; Sleep(150)
         } else {
             Gdip_DisposeImage(pBMScreen)
             PlayerStatus("Bought " list[index] "s!", "0x22e6a8",,false)
@@ -582,7 +581,8 @@ buyShop(itemList, itemType){
 
         relativeMouseMove(0.4,pos)
         Click
-        Sleep(350)
+        ; Sleep(350)
+        Sleep(200)
 
         if itemList[A_Index] == "Strawberry Sniper"{
             ScrollUp(2)
@@ -592,7 +592,8 @@ buyShop(itemList, itemType){
         if (CheckSetting(itemType, StrReplace(item, " ", ""))){
             CheckStock(A_Index, itemlist)
         } else {
-            Sleep(200)
+            ; do nothing fr
+            ; Sleep(200)
         }
 
 
@@ -640,12 +641,14 @@ CloseClutter(){
 }
 
 getItems(item){
-    static fileContent := ""
+    global remoteObject
 
+
+    static fileContent := ""
     if !fileContent {
         try {
             request := ComObject("WinHttp.WinHttpRequest.5.1")
-            request.Open("GET", "https://raw.githubusercontent.com/epicisgood/GAG-2-Updater/refs/heads/main/items.json", true)
+            request.Open("GET", "https://raw.githubusercontent.com/epicisgood/GAG-2-Updater/refs/heads/main/items.json", false)
             request.Send()
             request.WaitForResponse()
 
@@ -663,8 +666,9 @@ getItems(item){
             }
 
             global MyWindow
+            global remoteObject
             MyWindow.ExecuteScriptAsync("document.querySelector('#random-message').textContent = '" fileContent["message"] "'")
-            
+            remoteObject := JSON.stringify(fileContent)
         } catch as e {
             PlayerStatus("This is a very rare error! " e.Message, "0xFF0000",,true,,false)
         }
@@ -751,6 +755,7 @@ BuyGears(){
         Clickbutton_Tabs("Seeds")
         Sleep(1000)
         Walk_Studs(10, Skey)
+        Sleep(500)
         Walk_Studs(15, Akey)
         Sleep(1000)
         Send("{" Ekey "}")
@@ -802,8 +807,6 @@ BuyCrates(){
 }
 
 
-
-
 Disconnect(){
     loop 3 {
         if (CheckDisconnnect()){
@@ -835,22 +838,16 @@ MainLoop() {
     BuyCrates()
     loop {
         initShops()
-        
-        if ((If_Minute(4) || If_Minute(9)) && A_Sec == 30) {
+        if (Disconnect()){
+            Sleep(1500)
             CameraCorrection()
         }
-        if (If_Minute(0) || If_Minute(5)) {
+        
+        if ((If_Minute(0) || If_Minute(5) && A_Sec <= 6)) {
+            CameraCorrection()
             RewardInterupt()
         }
 
-        if (If_Minute(3)){
-            CloseClutter()
-            Close_Leaderboard()
-            if (Disconnect()){
-                Sleep(1500)
-                CameraCorrection()
-            }
-        }
         ShowToolTip()
         Sleep(1000)
     }
@@ -897,7 +894,6 @@ F2::
     ; Gdip_DisposeImage(pBMScreen)
     PauseMacro()
 }
-
 
 
 

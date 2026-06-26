@@ -118,13 +118,17 @@ WebButtonClickEvent(button) {
             run '"' exe_path32 '" /script "' A_WorkingDir '/scripts/AutoMail/AutoMailer.ahk"'
             StopMacro()
             ExitApp()
+        case "Close":
+            WinClose('A') 
+        case "Minimize":
+            WinMinimize('A') 
 	}
 }
 
 
 
 global CORE_SETTINGS := ["url", "discordID", "VipLink", "MoveSpeed","ThemeToggle"]
-global CATEGORIES    := ["Seeds", "Gears", "Crates"]
+global CATEGORIES    := ["Seeds", "Gears", "Crates", "Pets"]
 
 SaveSettings(settingsJson) {
     settings := JSON.Parse(settingsJson)

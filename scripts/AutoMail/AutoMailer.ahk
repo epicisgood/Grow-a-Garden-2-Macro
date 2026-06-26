@@ -59,7 +59,7 @@ global settingsFile := A_WorkingDir . "\settings.ini"
 
 
 
-bitmaps["Jandel"] := Gdip_BitmapFromBase64("iVBORw0KGgoAAAANSUhEUgAAAAYAAAAFCAYAAABmWJ3mAAAAIklEQVR4AazJsQ0AAAgCQcOEjPfbYm9ix7UnIJftaB7FWAAAAP//a4oywAAAAAZJREFUAwAdtBSxRI7mrwAAAABJRU5ErkJggg==")
+bitmaps["Jandel"] := Gdip_BitmapFromBase64("iVBORw0KGgoAAAANSUhEUgAAAAUAAAAGCAYAAAAL+1RLAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABhSURBVBhXRcy7DYAgFEbhCzfEBCx8NLewMTqDve5Cx0iswRasRH4NaDzlVxzCW0oJWms4w6APvfdQSmEbbcNSCkQERIRjGRrmnMHMsIZxrnPDGGP9Sd/9GEKov31yuB68AWgCRIA+Z8DOAAAAAElFTkSuQmCC")
 Click_Jandel(){
     Sleep(500)
     ActivateRoblox()
@@ -100,7 +100,7 @@ Type_Username(username){
     Sleep(250)
 
     MouseGetPos(&x,&y)
-    MouseMove(x,y + 50)
+    MouseMove(x,y + 80)
     Sleep(200)
     Click
     Sleep(750)

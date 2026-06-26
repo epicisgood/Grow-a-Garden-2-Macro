@@ -89,7 +89,7 @@ function applySettings(payload) {
 
 
 const CATEGORIES = [
-  "Seeds", "Gears", "Crates"
+  "Seeds", "Gears", "Crates", "Pets"
 ];
 
 

@@ -15,8 +15,8 @@
       </div>
       
       <div class="title-buttons">
-        <button class="minimizeButton" onclick="ahk.global.WinMinimize('A')">—</button>
-        <button class="closeButton" onclick="ahk.global.WinClose('A')">x</button>
+        <button class="minimizeButton" onclick="ahk.ButtonClick.Func('Minimize')">—</button>
+        <button class="closeButton" onclick="ahk.ButtonClick.Func('Close')">x</button>
       </div>
     </div>
 
@@ -58,6 +58,7 @@
         <button class="sidebar-btn active" onclick="switchSubTab('Seeds sub-tab')">Seeds</button>
         <button class="sidebar-btn" onclick="switchSubTab('Gears sub-tab')">Gears</button>
         <button class="sidebar-btn" onclick="switchSubTab('Crates sub-tab')">Crates</button> 
+        <button class="sidebar-btn" onclick="switchSubTab('Pets sub-tab')">Pets</button> 
       </div>
       
       <div class="sidebar-content-view">
@@ -101,6 +102,25 @@
               </div>
             </div>
           </div>
+        </div>
+
+
+        <div id="Pets sub-tab" class="sub-tab">
+          <h3>Join <button onclick="ahk.global.run('https://discord.gg/Vc465gUXHk')">discord</button> and get 2 invites to get this page buddy</h3>
+
+            <div class="rewards-grid" id="PetsGrid" style="display: none;">
+              <div class="reward-box">
+                <div class="reward-options">
+                  <label><input type="checkbox" id="Pets">Enable</label>
+                </div>
+                <hr style="margin: 10px 0;">
+                <div class="reward-options">
+                  <label><input type="checkbox" class="SelectAll">Select All</label>
+                </div>
+              </div>
+          </div>
+
+
         </div>
 
 
