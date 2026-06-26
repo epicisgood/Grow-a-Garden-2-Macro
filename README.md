@@ -39,9 +39,9 @@ A macro for **Grow A Garden 2** that automatically buys your selected seeds, gea
 | Action      | Key |
 | ----------- | --- |
 | Start Macro | F1  |
-| Stop Macro  | F2  |
+| Pause Macro  | F2  |
 | Stop Macro | ``Alt`` ``S``  |
-| Pause Macro | F3  |
+| Stop Macro | F3  | 
 
 ---
 
