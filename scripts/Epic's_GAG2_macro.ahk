@@ -752,7 +752,8 @@ BuyGears(){
         Walk_Studs(10, Skey)
         Sleep(500)
         Walk_Studs(15, Akey)
-        Walk_Studs(14,Skey)
+        Sleep(500)
+        Walk_Studs(25,Skey)
         Sleep(1000)
         Send("{" Ekey "}")
         if !DetectShop("gear"){
