@@ -749,11 +749,9 @@ BuyGears(){
         ActivateRoblox()
         Clickbutton_Tabs("Seeds")
         Sleep(1000)
-        Walk_Studs(10, Skey)
+        Walk_Studs(25, Skey)
         Sleep(500)
         Walk_Studs(15, Akey)
-        Sleep(500)
-        Walk_Studs(25,Skey)
         Sleep(1000)
         Send("{" Ekey "}")
         if !DetectShop("gear"){
