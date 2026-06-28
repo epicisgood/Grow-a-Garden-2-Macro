@@ -1,4 +1,4 @@
-﻿#Requires AutoHotkey v2.0
+#Requires AutoHotkey v2.0
 #SingleInstance Force
 #Warn VarUnset, Off
 SetWorkingDir A_ScriptDir . "\.."
@@ -752,6 +752,7 @@ BuyGears(){
         Walk_Studs(10, Skey)
         Sleep(500)
         Walk_Studs(15, Akey)
+        Walk_Studs(14,Skey)
         Sleep(1000)
         Send("{" Ekey "}")
         if !DetectShop("gear"){
@@ -788,7 +789,6 @@ BuyCrates(){
         Clickbutton_Tabs("Seeds")
         Sleep(1000)
         Walk_Studs(35, Skey)
-        Walk_Studs(7, Akey)
         Sleep(1000)
         Send("{" Ekey "}")
         if !DetectShop("crate"){
