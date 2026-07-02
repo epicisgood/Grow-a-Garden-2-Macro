@@ -518,6 +518,7 @@ CheckStock(index, list){
     captureY := Integer(windowY + (windowHeight * 0.25))
 
     pBMScreen := Gdip_BitmapFromScreen(captureX "|" captureY "|" captureWidth "|" captureHeight)
+    Gdip_SaveBitmapToFile(pBMScreen,"ss.png")
     If !(Gdip_ImageSearch(pBMScreen, bitmaps["GreenStock"], &OutputList, , , , , 3,,3) = 1 || Gdip_ImageSearch(pBMScreen, bitmaps["GreenStock2"], &OutputList , , , , , 3,,3) = 1) {
         Gdip_DisposeImage(pBMScreen)
         return 0
