@@ -534,7 +534,7 @@ CheckStock(index, list){
         If (Gdip_ImageSearch(pBMScreen, bitmaps["GreenStock"], &OutputList, , , , , 3,,3) = 1 || Gdip_ImageSearch(pBMScreen, bitmaps["GreenStock2"], &OutputList , , , , , 3,,3) = 1) {
             Cords := StrSplit(OutputList, ",")
             x := Cords[1] + captureX - 5
-            y := Cords[2] + captureY - 10
+            y := Cords[2] + captureY 
             MouseMove(x, y)
             SpamClick(15)
             Gdip_DisposeImage(pBMScreen)
