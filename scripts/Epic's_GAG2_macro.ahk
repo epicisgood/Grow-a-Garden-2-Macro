@@ -585,6 +585,7 @@ buyShop(itemList, itemType){
         Sleep(200)
 
         if (CheckSetting(itemType, StrReplace(item, " ", ""))){
+            Msgbox("Checking itemType: " StrReplace(item, " ", ""))
             CheckStock(A_Index, itemlist)
         } else {
             ; do nothing fr
