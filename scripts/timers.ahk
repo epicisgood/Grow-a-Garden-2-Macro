@@ -23,19 +23,19 @@ global Shops := {
     Crates: {
         name: "Crates",
         lastTime: LastShopTime,
-        duration: ConvertSeconds(0, 5, 0),
+        duration: ConvertSeconds(0, 4, 55),
         buy: (self) => BuyCrates()
     },
     Gears: {
         name: "Gears",
         lastTime: LastShopTime,
-        duration: ConvertSeconds(0, 5, 0),
+        duration: ConvertSeconds(0, 4, 55),
         buy: (self) => BuyGears()
     },
     Seeds: {
         name: "Seeds",
         lastTime: LastShopTime,
-        duration: ConvertSeconds(0, 5, 0),
+        duration: ConvertSeconds(0, 4, 55),
         buy: (self) => BuySeeds()
     }
 
