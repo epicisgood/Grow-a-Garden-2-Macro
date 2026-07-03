@@ -61,7 +61,7 @@ RewardInterupt() {
 
     if (Rewardlist.Length > 0) {
         Clickbutton_Tabs("Garden")
-        relativeMouseMove(0.5, 0.5)
+        Walk_Studs(15, WKey, Dkey)
         return 1
     }
 
