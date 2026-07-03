@@ -18,7 +18,7 @@ ConvertSeconds(hours,minutes,seconds){
 LastShopTime := nowUnix()
 
 
-; The highest object will be the last item in loop.
+
 global Shops := {
     Crates: {
         name: "Crates",
