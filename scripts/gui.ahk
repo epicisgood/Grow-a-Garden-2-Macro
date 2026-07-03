@@ -2,10 +2,12 @@
 
 version := "v1.0.3"
 settingsFile := "settings.ini"
+global MacroReady := false
 
-
-
-
+SetMacroReady() {
+    global MacroReady
+    MacroReady := true
+}
 
 if (A_IsCompiled) {
 	WebViewCtrl.CreateFileFromResource((A_PtrSize * 8) "bit\WebView2Loader.dll", WebViewCtrl.TempDir)
@@ -28,7 +30,6 @@ MyWindow.AddHostObjectToScript("ReadSettings", { func: SendSettings })
 
 MyWindow.Show("w600 h400")
 
-
 F1::{
     Start
 }
@@ -42,6 +43,11 @@ Alt & S:: {
 }
 
 Start(*) {
+    if !MacroReady {
+        ToolTip "Macro is still loading..."
+        SetTimer () => ToolTip(), -1500
+        return
+    }
 
     PlayerStatus("Starting " version " Grow A Garden 2 Macro by epic", "0xFFFF00", , false, , false)
     ; OnError (e, mode) => (mode = "return") * (-1)

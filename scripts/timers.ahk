@@ -23,19 +23,19 @@ global Shops := {
     Crates: {
         name: "Crates",
         lastTime: LastShopTime,
-        duration: ConvertSeconds(0, 4, 55),
+        duration: ConvertSeconds(0, 5, 0),
         buy: (self) => BuyCrates()
     },
     Gears: {
         name: "Gears",
         lastTime: LastShopTime,
-        duration: ConvertSeconds(0, 4, 55),
+        duration: ConvertSeconds(0, 5, 0),
         buy: (self) => BuyGears()
     },
     Seeds: {
         name: "Seeds",
         lastTime: LastShopTime,
-        duration: ConvertSeconds(0, 4, 55),
+        duration: ConvertSeconds(0, 5, 0),
         buy: (self) => BuySeeds()
     }
 
@@ -47,20 +47,26 @@ global Shops := {
 RewardInterupt() {
     global Shops
 
-    Rewardlist := []
     currentTime := nowUnix()
+
+    ShopBought := 0
 
     for _, shop in Shops.OwnProps() {
         ; MsgBox(_)
-        if (currentTime - shop.lastTime >= shop.duration) {
+        if (currentTime - shop.lastTime >= shop.duration - 10) {
+            if (ShopBought == 0){
+                CameraCorrection()
+            }
             shop.lastTime := currentTime
-            Rewardlist.Push(1)
             shop.buy()
+            ShopBought++
         }
     }
 
-    if (Rewardlist.Length > 0) {
+    if (ShopBought > 0) {
+        Sleep(200)
         Clickbutton_Tabs("Garden")
+        Sleep(1000)
         Walk_Studs(15, WKey, Dkey)
         return 1
     }

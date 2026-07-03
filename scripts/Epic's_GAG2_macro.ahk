@@ -36,7 +36,6 @@ SpaceKey := "sc039" ; Space
 SlashKey := "vk6F" ; /
 SC_LShift:="sc02a" ; LShift
 
-
 #Include "%A_ScriptDir%"
 #include ..\lib\
 
@@ -458,7 +457,7 @@ RedX_Shop_Button(clickit := 1){
     capW := windowWidth * 0.2
     capH := windowHeight * 0.3
     pBMScreen := Gdip_BitmapFromScreen(capX "|" capY "|" capW "|" capH)
-    Gdip_SaveBitmapToFile(pBMScreen, "ss.png")
+    ; Gdip_SaveBitmapToFile(pBMScreen, "ss.png")
     if (Gdip_ImageSearch(pBMScreen, bitmaps["Xbutton"], &OutputList, , , , , 25) = 1 || Gdip_ImageSearch(pBMScreen, bitmaps["Xbutton2"], &OutputList, , , , , 25) = 1) {
         if (clickit == 1){
             Cords := StrSplit(OutputList, ",")
@@ -475,10 +474,6 @@ RedX_Shop_Button(clickit := 1){
 }
 
 
-F4::{
-    ; Clickbutton_Tabs("Garden")
-    RedX_Shop_Button()
-}
 
 Clickbutton_Tabs(button, clickit := 1){
     hwnd := GetRobloxHWND()
@@ -491,7 +486,7 @@ Clickbutton_Tabs(button, clickit := 1){
     varation := 20
     
     pBMScreen := Gdip_BitmapFromScreen(capX "|" capY "|" capW "|" capH)
-    Gdip_SaveBitmapToFile(pBMScreen, "ss.png")
+    ; Gdip_SaveBitmapToFile(pBMScreen, "ss.png")
     if (Gdip_ImageSearch(pBMScreen, bitmaps[button], &OutputList, , , , , varation) = 1) {
         if (clickit == 1){
             Cords := StrSplit(OutputList, ",")
@@ -523,7 +518,7 @@ CheckStock(index, list){
     captureY := Integer(windowY + (windowHeight * 0.25))
 
     pBMScreen := Gdip_BitmapFromScreen(captureX "|" captureY "|" captureWidth "|" captureHeight)
-    Gdip_SaveBitmapToFile(pBMScreen,"ss.png")
+    ; Gdip_SaveBitmapToFile(pBMScreen,"ss.png")
     If !(Gdip_ImageSearch(pBMScreen, bitmaps["GreenStock"], &OutputList, , , , , 3,,3) = 1 || Gdip_ImageSearch(pBMScreen, bitmaps["GreenStock2"], &OutputList , , , , , 3,,3) = 1) {
         Gdip_DisposeImage(pBMScreen)
         return 0
@@ -843,8 +838,7 @@ MainLoop() {
             CameraCorrection()
         }
         
-        if ((If_Minute(0) || If_Minute(5) && A_Sec <= 6)) {
-            CameraCorrection()
+        if ((If_Minute(0) || If_Minute(5)) && A_Sec > 10) {
             RewardInterupt()
         }
 
@@ -900,3 +894,4 @@ F2::
 
 
 
+SetTimer SetMacroReady, -500
