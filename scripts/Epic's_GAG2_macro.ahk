@@ -411,13 +411,6 @@ CameraCorrection(){
     Sleep(1000)
     Walk_Studs(12, AKey, SKey)
     ZoomAlign()
-    Click("Right", "Down")
-    Sleep(200)
-    relativeMouseMove(0.5, 0.5)
-    Sleep(200)
-    MouseMove(0, 800, 10, "R")
-    Sleep(200)
-    Click("Right", "Up")
     Sleep(250)
     PlayerStatus("Finished Aligning!","0x2260e6",,false,,false)
 }
