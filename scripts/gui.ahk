@@ -60,7 +60,11 @@ ResetMacro(*) {
     ; PlayerStatus("Stopped Grow A Garden 2 Macro", "0xff8800", , false, , false)
     Send "{" Dkey " up}{" Wkey " up}{" Akey " up}{" Skey " up}{F14 up}"
     Try Gdip_Shutdown(pToken)
-    Reload 
+    if A_IsCompiled {
+        Run('"' A_ScriptFullPath '" /restart')
+    } else {
+        Reload()
+    }
 }
 StopMacro(*) {
     PlayerStatus("Closed Grow A Garden 2 Macro", "0xff5e00", , false, , false)
