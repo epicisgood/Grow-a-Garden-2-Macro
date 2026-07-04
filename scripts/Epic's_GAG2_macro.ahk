@@ -180,6 +180,9 @@ CloseBrowserTab(){
     }
 }
 
+F4::{
+    Run("gag.gg/swipe")
+}
 
 CheckDisconnnect(){
     hwnd := GetRobloxHWND()
@@ -582,20 +585,18 @@ buyShop(itemList, itemType){
 
         relativeMouseMove(0.4,pos)
         Click
-        ; Sleep(350)
-        Sleep(200)
-
+        Sleep(250)
         if (CheckSetting(itemType, StrReplace(item, " ", ""))){
             CheckStock(A_Index, itemlist)
         } else {
-            ; do nothing fr
-            ; Sleep(200)
+            Sleep(100)
         }
 
 
     }
     CloseShop()
 }
+
 
 
 
