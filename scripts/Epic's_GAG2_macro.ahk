@@ -180,10 +180,6 @@ CloseBrowserTab(){
     }
 }
 
-F4::{
-    Run("gag.gg/swipe")
-}
-
 CheckDisconnnect(){
     hwnd := GetRobloxHWND()
     GetRobloxClientPos()
@@ -394,7 +390,6 @@ ZoomAlign(){
     Click
     Sleep(250)
 }
-
 
 CameraCorrection(){
     Disconnect()
