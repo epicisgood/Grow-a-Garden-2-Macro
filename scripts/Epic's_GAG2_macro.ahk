@@ -392,6 +392,9 @@ ZoomAlign(){
 }
 
 CameraCorrection(){
+    Send("{O down}")
+    Sleep(500)
+    Send("{O up}")
     Disconnect()
     CloseClutter()
     Clickbutton_Tabs("Garden")
@@ -661,7 +664,7 @@ getItems(item){
 
     if Type(fileContent) != "Map" {
         PlayerStatus("Type: " Type(fileContent), "0xFF0000",,,,false)
-        PlayerStatus("Please contact _epic. for this error. " JSON.stringify(fileContent[item]), "0xFF0000",,true,,false)
+        PlayerStatus("Please contact _epic. for this error. " JSON.stringify(fileContent), "0xFF0000",,true,,false)
         fileContent := ""
         return []
     }
