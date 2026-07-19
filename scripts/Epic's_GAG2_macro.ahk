@@ -392,9 +392,9 @@ ZoomAlign(){
 }
 
 CameraCorrection(){
-    Send("{O down}")
+    Send("{o down}")
     Sleep(500)
-    Send("{O up}")
+    Send("{o up}")
     Disconnect()
     CloseClutter()
     Clickbutton_Tabs("Garden")
