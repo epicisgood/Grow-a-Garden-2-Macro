@@ -742,9 +742,9 @@ BuyGears(){
         ActivateRoblox()
         Clickbutton_Tabs("Seeds")
         Sleep(1000)
-        Walk_Studs(25, Skey)
+        Walk_Studs(30, Skey)
         Sleep(500)
-        Walk_Studs(15, Akey)
+        Walk_Studs(5, Akey)
         Sleep(1000)
         Send("{" Ekey "}")
         if !DetectShop("gear"){
@@ -780,7 +780,9 @@ BuyCrates(){
         ActivateRoblox()
         Clickbutton_Tabs("Seeds")
         Sleep(1000)
-        Walk_Studs(35, Skey)
+        Walk_Studs(30, Skey)
+        Sleep(500)
+        Walk_Studs(5, Dkey)
         Sleep(1000)
         Send("{" Ekey "}")
         if !DetectShop("crate"){
@@ -792,7 +794,6 @@ BuyCrates(){
         return 1
     }
 }
-
 
 Disconnect(){
     loop 3 {

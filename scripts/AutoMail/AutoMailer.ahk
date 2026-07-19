@@ -236,58 +236,46 @@ F2::{
 
 
 
-
 setItem_Image(){
     ActivateRoblox()
     ResizeRoblox()
 
-	if (MsgBox("After dismissing this message,`n take a picture of a corner of the seed in mail", "Auto Mail Program", 0x40001) = "Cancel")
-		ExitApp
+    if (MsgBox("Click OK, then take a picture of the seed you want to send.", "Auto Mail Program", 0x40001) = "Cancel")
+        ExitApp
 
-	StatusBar := Gui("-Caption +E0x80000 +AlwaysOnTop +ToolWindow -DPIScale")
-	StatusBar.Show("NA")
-	hbm := CreateDIBSection(windowWidth, windowHeight), hdc := CreateCompatibleDC(), obm := SelectObject(hdc, hbm)
-	G := Gdip_GraphicsFromHDC(hdc), Gdip_SetSmoothingMode(G, 2), Gdip_SetInterpolationMode(G, 2)
-	Gdip_FillRectangle(G, pBrush := Gdip_BrushCreateSolid(0x60000000), -1, -1, windowWidth+1, windowHeight+1), Gdip_DeleteBrush(pBrush)
-	UpdateLayeredWindow(StatusBar.Hwnd, hdc, windowX, windowY, windowWidth, windowHeight)
-	KeyWait "LButton", "D" ; Wait for the left mouse button to be pressed down.
-	MouseGetPos &x1, &y1
+    A_Clipboard := ""
 
-    Gdip_GraphicsClear(G), Gdip_FillRectangle(G, pBrush := Gdip_BrushCreateSolid(0xd0000000), -1, -1, windowWidth+1, 38), Gdip_DeleteBrush(pBrush)
+    Run("ms-screenclip:")
 
-    StatusBar.Destroy()
+    if !ClipWait(10, 1) {
+        MsgBox("Snipping timed out or was cancelled.", "Error", 0x10)
+        return
+    }
 
-	if (MsgBox("After dismissing this message,`n take a picture of a corner of the seed in mail", "Auto Mail Program", 0x40001) = "Cancel")
-		ExitApp
+    Sleep(500)
 
-	StatusBar := Gui("-Caption +E0x80000 +AlwaysOnTop +ToolWindow -DPIScale")
-	StatusBar.Show("NA")
-	hbm := CreateDIBSection(windowWidth, windowHeight), hdc := CreateCompatibleDC(), obm := SelectObject(hdc, hbm)
-	G := Gdip_GraphicsFromHDC(hdc), Gdip_SetSmoothingMode(G, 2), Gdip_SetInterpolationMode(G, 2)
-	Gdip_FillRectangle(G, pBrush := Gdip_BrushCreateSolid(0x60000000), -1, -1, windowWidth+1, windowHeight+1), Gdip_DeleteBrush(pBrush)
-	UpdateLayeredWindow(StatusBar.Hwnd, hdc, windowX, windowY, windowWidth, windowHeight)
-	KeyWait "LButton", "D" ; Wait for the left mouse button to be pressed down.
-	MouseGetPos &x2, &y2
+    pToken := Gdip_Startup() 
 
-    Gdip_GraphicsClear(G), Gdip_FillRectangle(G, pBrush := Gdip_BrushCreateSolid(0xd0000000), -1, -1, windowWidth+1, 38), Gdip_DeleteBrush(pBrush)
+    pBMScreen := Gdip_CreateBitmapFromClipboard()
+    
+    if (pBMScreen > 0) {
+        if !DirExist(A_WorkingDir . "/images")
+            DirCreate(A_WorkingDir . "/images")
 
-    StatusBar.Destroy()
+        Gdip_SaveBitmapToFile(pBMScreen, A_WorkingDir . "/images/scorch.png")
+        Gdip_DisposeImage(pBMScreen)
+        MsgBox("Image saved successfully!", "Success", 0x40)
+    } else {
+        MsgBox("Failed to get image from clipboard. Make sure you took a snip.", "Error", 0x10)
+    }
 
-	x := Min(x1, x2)
-	y := Min(y1, y2)
-	w := Abs(x2 - x1)
-	h := Abs(y2 - y1)
+    Gdip_Shutdown(pToken)
+
     ActivateRoblox()
-    relativeMouseMove(0.1,0.1)
+    relativeMouseMove(0.1, 0.1)
     Sleep(250)
-    pBMScreen := Gdip_BitmapFromScreen(x "|" y "|" w "|" h)
-    Gdip_SaveBitmapToFile(pBMScreen, A_WorkingDir . "/images/scorch.png")
-    Gdip_DisposeImage(pBMScreen)
-
     Send("{F3}")
-
 }
-
 
 
 
