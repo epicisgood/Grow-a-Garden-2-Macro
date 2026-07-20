@@ -727,7 +727,9 @@ BuySeeds(){
 }
 
 
-
+F4::{
+    BuyGears()
+}
 BuyGears(){
     gearItems := getItems("Gears")
     if !(CheckSetting("Gears", "Gears")){
@@ -742,7 +744,7 @@ BuyGears(){
         ActivateRoblox()
         Clickbutton_Tabs("Seeds")
         Sleep(1000)
-        Walk_Studs(30, Skey)
+        Walk_Studs(33, Skey)
         Sleep(500)
         Walk_Studs(5, Akey)
         Sleep(1000)
@@ -780,7 +782,7 @@ BuyCrates(){
         ActivateRoblox()
         Clickbutton_Tabs("Seeds")
         Sleep(1000)
-        Walk_Studs(30, Skey)
+        Walk_Studs(33, Skey)
         Sleep(500)
         Walk_Studs(5, Dkey)
         Sleep(1000)
