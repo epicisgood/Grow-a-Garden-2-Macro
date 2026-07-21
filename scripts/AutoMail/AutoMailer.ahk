@@ -94,6 +94,7 @@ Click_Jandel(){
 
 
 Type_Username(username){
+    Sleep(300)
     Send "{Text}" Username ""
     Sleep(250)
     Send("{" EnterKey "}")

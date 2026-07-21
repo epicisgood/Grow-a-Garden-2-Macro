@@ -727,9 +727,7 @@ BuySeeds(){
 }
 
 
-F4::{
-    BuyGears()
-}
+
 BuyGears(){
     gearItems := getItems("Gears")
     if !(CheckSetting("Gears", "Gears")){
