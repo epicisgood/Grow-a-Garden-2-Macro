@@ -94,7 +94,7 @@ Click_Jandel(){
 
 
 Type_Username(username){
-    Sleep(300)
+    Sleep(500)
     Send "{Text}" Username ""
     Sleep(250)
     Send("{" EnterKey "}")
@@ -129,7 +129,7 @@ Select_Mail_item(imagebitmap, itemCount){
         Sleep(300)
         loop LoopAmount {
             Click
-            Sleep(20)
+            Sleep(50)
         }
     } else {
         ; Scoll down in a loop until we see the thing
