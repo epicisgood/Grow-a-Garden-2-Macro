@@ -180,6 +180,8 @@ CloseBrowserTab(){
     }
 }
 
+
+
 CheckDisconnnect(){
     hwnd := GetRobloxHWND()
     GetRobloxClientPos()
@@ -188,7 +190,12 @@ CheckDisconnnect(){
         PlayerStatus("Starting Grow A Garden 2", "0x00a838", ,false, ,false)    
         Gdip_DisposeImage(pBMScreen)
         CloseRoblox()
-        PlaceID := 97598239454123
+
+        if (CheckSetting("FallSeeds", "FallSeeds")) {
+            PlaceID := 126987765280963 ; Fall Server
+        } else {
+            PlaceID := 97598239454123 ; Normal Game
+        }
 
         linkCode := ""
         shareCode := ""
@@ -218,13 +225,19 @@ CheckDisconnnect(){
                 ResizeRoblox()
                 ActivateRoblox()
                 GetRobloxClientPos(GetRobloxHWND())
-                Sleep(25000) ; Game Loading Time here dynamiically would be perfect to check loading time.
+                ; Sleep(25000) ; Game Loading Time here dynamiically would be perfect to check loading time.
+                DetectLoadingScreen()
+                DetectGameLoaded()
                 MouseMove windowX + windowWidth * 0.5, windowY + windowHeight * 0.5
                 Sleep(500)
                 Click
                 Click
+                Sleep(2750)
                 PlayerStatus("Game Succesfully loaded", "0x00a838", ,false)
+                Click("Down")
                 Sleep(1000)
+                Click("Down")
+                ; Sleep(1000)
                 CloseChat()
                 Close_Leaderboard()
                 Sleep(1500)
@@ -245,6 +258,50 @@ CheckDisconnnect(){
         return 0
     }
 }
+
+DetectLoadingScreen(){
+    hwnd := GetRobloxHWND()
+    GetRobloxClientPos(hwnd)
+    bitmaps["LoadingScreen"] := Gdip_BitmapFromBase64("iVBORw0KGgoAAAANSUhEUgAAAAYAAAAGCAYAAADgzO9IAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAChSURBVBhXAZYAaf8A4+fn/+fp6v/j5eb/6uzs/9TV1f9TVFT/AMHDxv+mqq//xsnN/8LCw/9ZWlr/Dw8P/wB+hYz/kpac/7a4uv9XWFj/FRgV/w4cD/8Aen+H/5GUmf9dX1//FhgW/woVCv8nVij/AHV6gf9PUFL/FBQU/wwXDf8lUib/QpJD/wBKTVD/GBsa/wsUC/8kUCX/PotA/06uUP92wlGMoIR+ygAAAABJRU5ErkJggg==")
+    loop 30 {
+        pBMScreen := Gdip_BitmapFromScreen(windowX "|" windowY + 30 "|" windowWidth "|" windowHeight - 30)
+        if (Gdip_ImageSearch(pBMScreen, bitmaps["LoadingScreen"], , , , , , 25) = 1) {
+            Gdip_DisposeImage(pBMScreen)
+            return true
+        } 
+        Gdip_DisposeImage(pBMScreen)
+        Sleep(1000)
+    }
+    Gdip_DisposeImage(pBMScreen)
+    return false
+    
+
+}
+
+
+DetectGameLoaded(){
+    hwnd := GetRobloxHWND()
+    GetRobloxClientPos(hwnd)
+    bitmaps["GameLoaded"] := Gdip_BitmapFromBase64("iVBORw0KGgoAAAANSUhEUgAAAAQAAAAFCAYAAABirU3bAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABTSURBVBhXJcixEYAgDAXQ3AWogKOG0NI5AhOxgZ2xsoEJnPV7avGaR2oMlPlzMIPeOL3HJYLVGkitxZ4S5rbh7v2PEQI0Z0wRkDqHESO0FKxa8QBauCEX8vIlqQAAAABJRU5ErkJggg==")
+
+    loop 30 {
+        pBMScreen := Gdip_BitmapFromScreen(windowX "|" windowY + 30 "|" windowWidth "|" windowHeight - 30)
+        if !(Gdip_ImageSearch(pBMScreen, bitmaps["GameLoaded"], , , , , , 25) = 1) {
+            Gdip_DisposeImage(pBMScreen)
+            return true
+        } 
+        Gdip_DisposeImage(pBMScreen)
+        Sleep(500)
+    }
+
+    Gdip_DisposeImage(pBMScreen)
+    return false
+    
+}
+
+
+
+
 
 CloseChat(){
     ActivateRoblox()
@@ -696,8 +753,14 @@ initShops(){
 }
 
 BuySeeds(){
-    seedItems := getItems("Seeds")
-    if !(CheckSetting("Seeds", "Seeds")){
+    if CheckSetting("FallSeeds", "FallSeeds") {
+        ItemType := "FallSeeds"
+    } else {
+        ItemType := "Seeds"
+    }
+    
+    seedItems := getItems(ItemType)
+    if !(CheckSetting(ItemType, ItemType)){
         return
     }
     loop 3 {
@@ -705,7 +768,7 @@ BuySeeds(){
             Sleep(1500)
             CameraCorrection()
         }
-        PlayerStatus("Going to buy Seeds!", "0x22e6a8",,false,,false)
+        PlayerStatus("Going to buy " ItemType "!", "0x22e6a8",,false,,false)
         relativeMouseMove(0.5, 0.5)
         Sleep(500)
         Clickbutton_Tabs("Seeds")
@@ -715,7 +778,7 @@ BuySeeds(){
             CameraCorrection()
             continue
         }
-        buyShop(seedItems, "Seeds")
+        buyShop(seedItems, ItemType)
         CloseClutter()
         return 1
     }
@@ -729,19 +792,27 @@ BuySeeds(){
 
 
 BuyGears(){
-    gearItems := getItems("Gears")
-    if !(CheckSetting("Gears", "Gears")){
+    if CheckSetting("FallGears", "FallGears") {
+        ItemType := "FallGears"
+    } else {
+        ItemType := "Gears"
+    }
+
+    gearItems := getItems(ItemType)
+    if !(CheckSetting(ItemType, ItemType)){
         return
     }
     loop 3 {
-        PlayerStatus("Going to buy Gears!", "0x22e6a8",,false,,false)
+        PlayerStatus("Going to buy " ItemType "!", "0x22e6a8",,false,,false)
         if (Disconnect()){
             Sleep(1500)
             CameraCorrection()
         }
         ActivateRoblox()
         Clickbutton_Tabs("Seeds")
-        Sleep(1000)
+        ; Sleep(500)
+        ; CheckWearWolf()
+        ; Sleep(500)
         Walk_Studs(33, Skey)
         Sleep(500)
         Walk_Studs(5, Akey)
@@ -751,7 +822,7 @@ BuyGears(){
             CameraCorrection()
             continue
         }
-        buyShop(gearItems, "Gears")
+        buyShop(gearItems, ItemType)
         CloseClutter()
         return 1
     }
@@ -767,33 +838,45 @@ BuyGears(){
 
 
 BuyCrates(){
-    if !(CheckSetting("Crates", "Crates")){
+    if CheckSetting("FallCrates", "FallCrates") {
+        ItemType := "FallCrates"
+    } else {
+        ItemType := "Crates"
+    }
+
+    if !(CheckSetting(ItemType, ItemType)){
         return
     }
-    crateitems := getItems("Crates")
+    crateitems := getItems(ItemType)
     loop 3 {
         if (Disconnect()){
             Sleep(1500)
             CameraCorrection()
         }
-        PlayerStatus("Going to buy Crates!", "0x22e6a8",,false,,false)
+        PlayerStatus("Going to buy " ItemType "!", "0x22e6a8",,false,,false)
         ActivateRoblox()
         Clickbutton_Tabs("Seeds")
         Sleep(1000)
         Walk_Studs(33, Skey)
         Sleep(500)
         Walk_Studs(5, Dkey)
-        Sleep(1000)
+        ; Sleep(500)
+        ; CheckWearWolf()
+        ; Sleep(500)
         Send("{" Ekey "}")
         if !DetectShop("crate"){
             CameraCorrection()
             continue
         }
-        buyShop(crateitems, "Crates")
+        buyShop(crateitems, ItemType)
         CloseClutter()
         return 1
     }
 }
+
+
+
+
 
 Disconnect(){
     loop 3 {

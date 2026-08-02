@@ -1,6 +1,6 @@
 #Requires AutoHotkey v2.0
 
-version := "v1.0.5"
+version := "v1.0.6"
 settingsFile := "settings.ini"
 global MacroReady := false
 
@@ -138,7 +138,7 @@ WebButtonClickEvent(button) {
 
 
 global CORE_SETTINGS := ["url", "discordID", "VipLink", "MoveSpeed","ThemeToggle"]
-global CATEGORIES    := ["Seeds", "Gears", "Crates", "Pets"]
+global CATEGORIES    := ["Seeds", "Gears", "Crates", "Pets", "FallSeeds", "FallGears", "FallCrates", "FallPets"]
 
 SaveSettings(settingsJson) {
     settings := JSON.Parse(settingsJson)
