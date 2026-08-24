@@ -789,7 +789,9 @@ BuySeeds(){
     CameraCorrection()
 }
 
-
+F4::{
+    BuyCrates()
+}
 
 BuyGears(){
     if CheckSetting("FallGears", "FallGears") {
@@ -813,9 +815,9 @@ BuyGears(){
         ; Sleep(500)
         ; CheckWearWolf()
         ; Sleep(500)
-        Walk_Studs(33, Skey)
-        Sleep(500)
-        Walk_Studs(5, Akey)
+        Sleep(1000)
+        Walk_Studs(15, Akey)
+        Walk_Studs(52, Skey)
         Sleep(1000)
         Send("{" Ekey "}")
         if !DetectShop("gear"){
@@ -857,9 +859,9 @@ BuyCrates(){
         ActivateRoblox()
         Clickbutton_Tabs("Seeds")
         Sleep(1000)
-        Walk_Studs(33, Skey)
-        Sleep(500)
-        Walk_Studs(5, Dkey)
+        Walk_Studs(15, Dkey)
+        Walk_Studs(53, Skey)
+        Sleep(1000)
         ; Sleep(500)
         ; CheckWearWolf()
         ; Sleep(500)
