@@ -816,9 +816,8 @@ BuyGears(){
         ; CheckWearWolf()
         ; Sleep(500)
         Sleep(1000)
-        Walk_Studs(15, Akey)
-        Walk_Studs(57, Skey)
-        Walk_Studs(5,Dkey)
+        Walk_Studs(15, Dkey)
+        Walk_Studs(55, Skey)
         Sleep(1000)
         Send("{" Ekey "}")
         if !DetectShop("gear"){
