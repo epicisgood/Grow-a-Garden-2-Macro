@@ -817,7 +817,7 @@ BuyGears(){
         ; Sleep(500)
         Sleep(1000)
         Walk_Studs(15, Akey)
-        Walk_Studs(52, Skey)
+        Walk_Studs(55, Skey)
         Sleep(1000)
         Send("{" Ekey "}")
         if !DetectShop("gear"){
@@ -860,7 +860,7 @@ BuyCrates(){
         Clickbutton_Tabs("Seeds")
         Sleep(1000)
         Walk_Studs(15, Dkey)
-        Walk_Studs(53, Skey)
+        Walk_Studs(55, Skey)
         Sleep(1000)
         ; Sleep(500)
         ; CheckWearWolf()
